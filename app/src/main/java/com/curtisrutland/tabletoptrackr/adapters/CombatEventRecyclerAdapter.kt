@@ -6,16 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.PopupMenu
 import android.widget.TextView
 import com.curtisrutland.tabletoptrackr.R
 import com.curtisrutland.tabletoptrackr.controllers.AddCombatEventActivity
 import com.curtisrutland.tabletoptrackr.models.CombatEvent
-import com.curtisrutland.tabletoptrackr.services.CombatEventDataService
-import org.jetbrains.anko.alert
-import org.jetbrains.anko.noButton
 import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.yesButton
 
 class CombatEventRecyclerAdapter(private val context: Context, private val events: List<CombatEvent>)
     : RecyclerView.Adapter<CombatEventRecyclerAdapter.Holder>() {
@@ -41,12 +36,12 @@ class CombatEventRecyclerAdapter(private val context: Context, private val event
         private val notes = itemView?.findViewById<TextView>(R.id.notesText)
         private val icon = itemView?.findViewById<ImageView>(R.id.menuIcon)
         private val arrow = itemView?.findViewById<ImageView>(R.id.arrowIcon)
-        private val editMenuItemId = R.id.editMenuItem
-        private val deleteMenuItemId = R.id.deleteMenuItem
 
         fun bindCombatEvent(event: CombatEvent) {
+
             source?.text = event.source
             hpChange?.text = event.hpChange?.toString() ?: "0"
+            //hpChange?.setTextColor(if (event.hpChange ?: 0 > 0) Color.GREEN else Color.RED)
             currentHp?.text = event.currentHp.toString()
             notes?.text = event.notes
 
@@ -57,29 +52,12 @@ class CombatEventRecyclerAdapter(private val context: Context, private val event
             arrow?.visibility = hpVis
 
             icon?.setOnClickListener {
-                val popup = PopupMenu(context, icon)
-                popup.menuInflater.inflate(R.menu.popup_menu, popup.menu)
-                popup.setOnMenuItemClickListener { item ->
-                    when (item.itemId) {
-                        editMenuItemId -> {
-                            context.startActivity<AddCombatEventActivity>(
-                                    "source" to event.source,
-                                    "notes" to event.notes,
-                                    "hpChange" to event.hpChange.toString(),
-                                    "id" to event.id.toString()
-                            )
-                        }
-                        deleteMenuItemId -> {
-                            context.alert("Are you sure you want to remove this event?",
-                                    "Delete Event?") {
-                                yesButton { CombatEventDataService.removeEvent(event.id) }
-                                noButton { }
-                            }.show()
-                        }
-                    }
-                    true
-                }
-                popup.show()
+                context.startActivity<AddCombatEventActivity>(
+                        "source" to event.source,
+                        "notes" to event.notes,
+                        "hpChange" to event.hpChange.toString(),
+                        "id" to event.id.toString()
+                )
             }
         }
     }

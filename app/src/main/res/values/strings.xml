@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">Tabletop Trackr</string>
-    <string name="title_activity_test">TestActivity</string>
+    <string name="add_event">Add Combat Event</string>
+    <string name="menu_icon_content_description">menu icon</string>
+    <string name="arrow_icon_content_description">arrow icon</string>
+    <string name="source_hint">Source</string>
+    <string name="hp_change_hint">HP Change</string>
+    <string name="toggle_off_text">-</string>
+    <string name="toggle_on_text">+</string>
+    <string name="notes_hint">Notes (optional)</string>
+    <string name="add_button_text">Add</string>
+    <string name="update_button_text">Update</string>
+    <string name="current_hp_text">Current HP:</string>
+    <string name="zero">0</string>
 </resources>

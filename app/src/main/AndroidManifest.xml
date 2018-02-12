@@ -16,6 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".controllers.AddCombatEventActivity"
+            android:label="@string/add_event"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

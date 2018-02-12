@@ -45,6 +45,10 @@ object CombatEventDataService {
 
     fun removeEvent(id: UUID) {
         val targetIndex = events.indexOfFirst { it.id == id }
+        removeEvent(targetIndex)
+    }
+
+    fun removeEvent(targetIndex: Int) {
         if (targetIndex < 0) return
         events.removeAt(targetIndex)
         var hp = 0
